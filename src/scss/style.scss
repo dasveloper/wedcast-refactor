@@ -1,0 +1,750 @@
+@import "node_modules/react-image-gallery/styles/scss/image-gallery.scss";
+
+@font-face {
+  font-family: Quicksand;
+  src: url("../assets/Quicksand-Regular.ttf");
+}
+@font-face {
+  font-family: QuicksandBold;
+  src: url("../assets/Quicksand-Bold.ttf");
+}
+@font-face {
+  font-family: QuicksandMedium;
+  src: url("../assets/Quicksand-Medium.ttf");
+}
+@font-face {
+  font-family: QuicksandLight;
+  src: url("../assets/Quicksand-Light.ttf");
+}
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+#root {
+  width: 100%;
+  height: 100%;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+.image-gallery-content {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  .image-gallery-slide-wrapper,
+  .image-gallery-swipe,
+  .image-gallery-slides,
+  .image-gallery-slide {
+    height: 100%;
+    width: 100%;
+    .image-gallery-image {
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      img {
+        max-height: 100%;
+        max-width: 100%;
+        height: auto;
+        width: auto;
+      }
+    }
+  }
+}
+.gallery-bg {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background: #1f9fac;
+}
+
+.feed-info {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 4px;
+  text-align: center;
+  p {
+    font-family: QuicksandMedium;
+    font-size: 1.4rem;
+    color: #fff;
+    margin: 0.25rem;
+  }
+}
+
+.overlay-wrapper {
+  min-width: 200px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  padding: 10px;
+  transition: 0.4s transform;
+  transform: translateX(-100%);
+  display: flex;
+  flex-direction: column;
+  &.show {
+    transform: translateY(0%);
+
+    .menu-toggle {
+      .menu-toggle-ring {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  .menu-toggle {
+    padding: 15px;
+    max-width: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    right: 0;
+    top: 40px;
+    transform: translateX(100%);
+    border-radius: 0 20px 20px 0;
+    .menu-toggle-ring {
+      transition: 0.4s transform;
+      max-width: 100%;
+    }
+  }
+  .menu-button {
+    margin: 0.5rem 0;
+    outline: none;
+    font-family: QuicksandMedium;
+    background: transparent;
+    padding: 10px;
+    font-size: 1.2rem;
+    color: #fff;
+    border: 1px solid #fff;
+    transition: 0.2s;
+    &:hover {
+      color: #000;
+      background: #fff;
+    }
+  }
+  .menu-logo {
+    align-self: center;
+    max-width: 200px;
+    margin: 1rem;
+  }
+}
+
+.cast-wrapper {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  background: #1f9fac;
+
+  position: relative;
+}
+.login-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  &::before {
+    content: "";
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  &::after {
+    content: "";
+    background-image: url("../assets/guests.jpg");
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    filter: blur(3px);
+  }
+}
+.logo {
+  // position: absolute;
+  top: 40px;
+  width: 300px;
+  max-width: 90%;
+  z-index: 10;
+}
+
+.login-wrapper {
+  margin: 40px;
+  width: 450px;
+  height: 300px;
+  max-width: 100%;
+  border-radius: 4px;
+  padding: 40px;
+  z-index: 2;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.6);
+  box-sizing: border-box;
+  .welcome {
+    font-family: QuicksandMedium;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+  .get-started {
+    font-family: Quicksand;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .login-form {
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    width: 100%;
+  }
+  .name-input {
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 10px;
+    line-height: 1.5rem;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.6);
+    font-family: QuicksandLight;
+    box-sizing: border-box;
+  }
+  .submit-name-button {
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 10px;
+    line-height: 1.5rem;
+    border: none;
+    outline: none;
+    background: #1f9fac;
+    color: #fff;
+    border-radius: 4px;
+    font-family: QuicksandLight;
+    box-sizing: border-box;
+    &:hover {
+      background: #58919f;
+    }
+  }
+}
+
+//Index
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+
+  .hero-bg {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+
+    &::after {
+      content: "";
+      background-image: url("../assets/bride-groom.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      filter: blur(2px);
+      z-index: -1;
+      transform: scale(1.01);
+    }
+  }
+  .hero-left,
+  .hero-right {
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    z-index: 2;
+  }
+  .hero-right {
+    justify-content: flex-end;
+
+    .phone-img {
+      max-width: 400px;
+      z-index: 2;
+      height: 400px;
+      transform: translateY(5%);
+    }
+  }
+  .hero-left {
+    justify-content: center;
+    .hero-inner {
+      flex-direction: column;
+      align-items: center;
+      display: flex;
+      background: rgba(0, 0, 0, 0.5);
+      width: 100%;
+      padding: 30px 20px;
+      box-sizing: border-box;
+      border-radius: 0;
+    }
+    .hero-logo {
+      max-width: 300px;
+    }
+    .ios-appstore-wrapper {
+      border: 1px solid #fff;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      padding: 10px 20px;
+      border-radius: 100px;
+      margin-top: 20px;
+      min-width: 220px;
+      text-decoration: none;
+      .ios-appstore {
+        width: 1.3rem;
+      }
+      .ios-appstore-text {
+        text-decoration: none;
+        color: #fff;
+        margin-left: 20px;
+        font-size: 0.8rem;
+        font-family: Quicksand;
+        text-align: center;
+        line-height: 1;
+        span {
+          font-size: 1.3rem;
+          font-family: QuicksandMedium;
+
+          display: block;
+        }
+      }
+    }
+    .hero-tagline {
+      max-width: 90%;
+      text-align: center;
+      font-size: 1.2rem;
+      font-family: Quicksand;
+
+      margin: 20px 0;
+      color: #fff;
+    }
+  }
+}
+.lower-hero {
+  max-width: 100%;
+  display: block;
+}
+.social {
+  background: #c5faf2;
+  padding: 20px 0;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  .social-inner {
+    display: flex;
+    justify-content: space-evenly;
+
+    width: 600px;
+    max-width: 100%;
+  }
+}
+.intro {
+  background: #c5faf2;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 80px;
+  padding-bottom: 20px;
+  color: #fff;
+  font-family: Quicksand;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+  p {
+    margin: auto;
+    width: 80%;
+    display: block;
+    color: #1f9fac;
+    font-size: 1.4rem;
+  }
+  .find-wedcast {
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    margin: 40px;
+    margin-top: 30px;
+    padding: 15px;
+    text-decoration: none;
+    font-family: QuicksandMedium;
+
+    &:hover {
+      color: #1f9fac;
+      background-color: #fff;
+    }
+  }
+}
+.mission {
+  background: #a8bf59;
+  padding: 20px 40px;
+  color: #fff;
+  font-family: Quicksand;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  .mission-header {
+    font-family: QuicksandBold;
+    font-size: 2.4rem;
+  }
+  p {
+    margin: auto;
+    width: 80%;
+    display: block;
+    color: #fff;
+    padding: 20px;
+  }
+  .vows {
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    .vow {
+      align-self: center;
+
+      list-style: none;
+      .vow-header {
+        font-family: QuicksandBold;
+        font-size: 1.8rem;
+      }
+      .vow-details {
+      }
+    }
+  }
+}
+.beta {
+  background: #edc344;
+  padding: 40px;
+  color: #fff;
+  font-family: Quicksand;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  width: 100%;
+  text-align: center;
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    margin: auto;
+    width: 80%;
+    display: block;
+  }
+  #ph-subscribe-button {
+    border-color: #1f9fac;
+    background-color: #1f9fac;
+    transition: 0.2s all;
+    &:hover {
+      border-color: #1f9fac;
+      color: #1f9fac;
+      background-color: #fff;
+    }
+  }
+  .how-it-works {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 8px;
+    margin-top: 1rem;
+    padding: 10px;
+    h4 {
+      color: #000;
+      font-size: 1.7rem;
+      margin: 0.5rem;
+    }
+  }
+  .beta-instructions {
+    padding-top: 0;
+    -webkit-margin-before: 0;
+    color: #000;
+    li {
+      text-align: left;
+      margin: 0.75rem 0;
+      font-size: 1rem;
+    }
+  }
+  .find-wedcast {
+    display: inline-block;
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    margin: 40px;
+    margin-top: 10px;
+    padding: 15px;
+    text-decoration: none;
+    font-family: QuicksandMedium;
+
+    &:hover {
+      color: #1f9fac;
+      background-color: #fff;
+    }
+  }
+}
+.download-header {
+  font-family: QuicksandBold;
+  font-size: 2.4rem;
+  margin: 40px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.appstore-cta-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  margin: auto;
+  padding-bottom: 40px;
+  .appstore-cta {
+    flex: 1;
+    margin: 10px 20px;
+    border: 1px solid #000;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 100px;
+    text-decoration: none;
+    .appstore-cta-icon {
+      width: 2rem;
+    }
+    .appstore-cta-text {
+      text-decoration: none;
+      color: #000;
+      margin-left: 20px;
+      font-size: 1rem;
+      font-family: Quicksand;
+      text-align: center;
+      line-height: 1;
+      span {
+        font-size: 1.4rem;
+        font-family: QuicksandMedium;
+
+        display: block;
+      }
+    }
+  }
+}
+.feature-header {
+  font-family: QuicksandBold;
+  font-size: 2.4rem;
+  margin: 40px;
+  text-align: center;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  max-width: 90%;
+  margin: auto;
+
+  .feature-left,
+  .feature-right {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .feature-left {
+    order: 1;
+  }
+  .feature-right {
+    order: 2;
+  }
+  .feature-image {
+    height: 300px;
+  }
+  .feature-header {
+    font-size: 1.8rem;
+    font-family: QuicksandBold;
+  }
+  .feature-text {
+    max-width: 90%;
+    margin-top: 10px;
+    font-size: 1.4rem;
+    font-family: Quicksand;
+    text-align: center;
+  }
+}
+.email {
+  background: #1f9fac;
+  padding: 40px;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  .email-address {
+    margin: auto;
+    font-size: 1rem;
+    display: block;
+    color: #fff;
+    font-family: Quicksand;
+  }
+}
+
+.error-message {
+  font-size: 1.2rem;
+  color: red;
+}
+.success-message {
+  font-size: 1.2rem;
+  color: green;
+}
+
+#ph-email-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+#ph-email {
+  border: 1px solid #e8e8e8;
+  box-sizing: border-box;
+  color: #000000;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 24px;
+  padding: 12px;
+  font-family: Quicksand;
+  border-radius: 4px;
+  min-width: 320px;
+  margin: 10px;
+}
+
+#ph-subscribe-button {
+  background: #9ee3d3;
+  border-radius: 3px;
+  border: 1px solid #9ee3d3;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 12px 13px;
+  text-transform: uppercase;
+  font-family: Quicksand;
+  margin: 10px;
+  border-radius: 4px;
+  -webkit-appearance: none;
+}
+
+@media screen and (min-width: 690px) {
+  .appstore-cta-wrapper {
+    flex-direction: row;
+
+    width: 80%;
+    .appstore-cta {
+      .appstore-cta-icon {
+        width: 2.6rem;
+      }
+      .appstore-cta-text {
+        margin-left: 20px;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .hero {
+    flex-direction: row;
+    height: 85vh;
+    .hero-left {
+      .hero-inner {
+        width: auto;
+        max-width: 80%;
+        border-radius: 8px;
+      }
+    }
+    .hero-right {
+      .phone-img {
+        height: 95%;
+      }
+    }
+  }
+  .feature {
+    flex-direction: row;
+
+    .feature-right,
+    .feature-left {
+      order: initial;
+    }
+  }
+  .email {
+    .email-address {
+      font-size: 2rem;
+    }
+  }
+
+  #ph-email-form {
+    flex-wrap: nowrap;
+  }
+  #ph-subscribe-button {
+    margin: 0px;
+    border-radius: 0 4px 4px 0;
+  }
+  #ph-email {
+    border-radius: 4px 0 0 4px;
+    margin: 0px;
+  }
+}
+.privacy-policy {
+  padding: 10px;
+}
